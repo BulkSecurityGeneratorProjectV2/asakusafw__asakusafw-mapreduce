@@ -19,6 +19,7 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -245,9 +246,7 @@ public final class HadoopDriver implements Closeable {
 
     private <T> File createTempFile(Class<T> modelType) throws IOException {
         assert modelType != null;
-        return File.createTempFile(
-                modelType.getSimpleName() + "_",
-                ".seq");
+        return Files.createTempFile(modelType.getSimpleName() + "_", ".seq").toFile();
     }
 
     void onInputCompleted(File temp, Location path) {
